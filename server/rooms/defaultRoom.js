@@ -30,6 +30,7 @@ class DefaultRoom extends Room {
       this.state.players[ client.sessionId ] = data.data;
      }
      else if (data.type === 'shoot') {
+       data.shooter = client.sessionId;
        this.broadcast(data);
      }
   }
