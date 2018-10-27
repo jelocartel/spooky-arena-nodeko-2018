@@ -16,7 +16,6 @@ ig.module(
 	'game.entities.enemy-player',
 
 	'game.entities.grenade-pickup',
-	'game.entities.health-pickup',
 
 	'game.entities.player',
 
@@ -300,9 +299,7 @@ var MyGame = tpf.Game.extend({
 	},
 
 	spawnPowerup: function() {
-		// 1/3 chance for health, 2/3 chance for grenades
-		var powerups = [EntityHealthPickup, EntityGrenadePickup, EntityGrenadePickup];
-		var entityClass = powerups.random();
+		var entityClass = EntityGrenadePickup;
 
 		var pos = this.getRandomSpawnPos();
 		this.spawnEntity(entityClass, pos.x, pos.y);

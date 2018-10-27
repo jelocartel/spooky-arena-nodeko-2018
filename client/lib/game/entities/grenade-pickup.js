@@ -9,19 +9,19 @@ ig.module(
 
 EntityGrenadePickup = tpf.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.A,
-	
+
 	size: {x: 16, y: 16},
 	vpos: 0.5,
-	scale: 0.5,
+	scale: 0.2,
 	amount: 8,
 
 	dynamicLight: true,
 	_wmBoxColor: '#55ff00',
-	
-	animSheet: new ig.AnimationSheet( 'media/grenade-pickup.png', 32, 32 ),
+
+	animSheet: new ig.AnimationSheet( 'media/pumpkin-pile.png', 128, 128 ),
 	pickupSound: new ig.Sound( 'media/sounds/health-pickup.*' ),
 	bounceTimer: null,
-	
+
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
 		this.addAnim( 'idle', 10, [0] );
@@ -30,7 +30,7 @@ EntityGrenadePickup = tpf.Entity.extend({
 	update: function() {
 		this.parent();
 	},
-	
+
 	check: function( other ) {
 		other.giveAmmo(WeaponGrenadeLauncher, this.amount);
 		this.pickupSound.play();
