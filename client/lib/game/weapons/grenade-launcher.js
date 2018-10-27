@@ -57,9 +57,9 @@ EntityGrenade = tpf.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.B,
 	collides: ig.Entity.COLLIDES.NEVER,
 
-	size: {x: 8, y: 8},
+	size: {x: 25.6, y: 25.6},
 	speed: 440,
-	scale: 0.25,
+	scale: 0.2,
 
 	bounciness: 0.8,
 	minBounceVelocity: 0.5,
@@ -68,7 +68,7 @@ EntityGrenade = tpf.Entity.extend({
 	explosionParticles: 20,
 	explosionRadius: 60,
 
-	animSheet: new ig.AnimationSheet( 'media/grenade.png', 32, 32 ),
+	animSheet: new ig.AnimationSheet( 'media/grenade.png', 128, 128 ),
 	explodeSound: new ig.Sound( 'media/sounds/explosion.*' ),
 	bounceSound: new ig.Sound( 'media/sounds/grenade-bounce.*' ),
 	dynamicLight: true,
