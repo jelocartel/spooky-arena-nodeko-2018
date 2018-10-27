@@ -54,13 +54,16 @@ ig.module(
                 if (message.type === 'shoot') {
                     console.log("server just sent this message:");
                     console.log(message.data);
-                    ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle, shooterId: message.shooter} );
+                    if (message.shooter !== ig.game.player.enemyId) {
+                        ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle, shooterId: message.shooter} );
+                    }
                 } else if (message.type === 'killed') {
                     console.log('killed event = ', message.data)
                     if(ig.game.player.enemyId === message.data.id) {
                         ig.game.player.kill();
                     }
-                    
+                } else if (message.type === 'left') {
+                    ig.game.ememies[message.data.id].kill();
                 }
               });
 
