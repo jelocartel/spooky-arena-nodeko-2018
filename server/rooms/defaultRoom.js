@@ -26,7 +26,12 @@ class DefaultRoom extends Room {
 
   // When a client sends a message
   onMessage (client, data) {
-      this.state.players[ client.sessionId ] = data;
+     if ( data.type === 'position') {
+      this.state.players[ client.sessionId ] = data.data;
+     }
+     else if (data.type === 'shoot') {
+       this.broadcast(data);
+     }
   }
 
 
