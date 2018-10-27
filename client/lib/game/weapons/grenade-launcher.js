@@ -17,7 +17,7 @@ WeaponGrenadeLauncher = Weapon.extend({
 	cooldown: 0.5,
 
 	animSheet: new ig.AnimationSheet( 'media/cat.png', 360, 268),
-	shootSound: new ig.Sound( 'media/sounds/grenade-launcher.*' ),
+	shootSound: new ig.Sound( 'media/sounds/cat.*' ),
 	emptySound: new ig.Sound( 'media/sounds/empty-click.*' ),
 	ammoIconImage: new ig.Image( 'media/grenade.png' ),
 	ammoIcon: null,
