@@ -45,7 +45,7 @@ WeaponGrenadeLauncher = Weapon.extend({
 	},
 
 	shoot: function( x, y, angle ) {
-		const a = ig.game.spawnEntity(EntityGrenade, x, y, {angle: angle} );
+		const a = ig.game.spawnEntity(EntityGrenade, x, y, {angle: angle, shooterId: ig.game.player.enemyId} );
 		this.currentAnim = this.anims.shoot.rewind();
 		this.shootSound.play();
 

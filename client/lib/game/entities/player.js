@@ -228,7 +228,7 @@ EntityPlayer = tpf.Entity.extend({
 	},
 
 	receiveDamage: function( amount, from ) {
-		if (ig.game.playerId === from.shooterId) {
+		if (ig.game.player.enemyId === from.shooterId) {
 			return;
 		}
 		if( this.god || this._killed ) {
