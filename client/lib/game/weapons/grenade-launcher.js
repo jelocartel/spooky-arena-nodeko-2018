@@ -50,7 +50,7 @@ WeaponGrenadeLauncher = Weapon.extend({
 		this.shootSound.play();
 
 		this.flash(0.2);
-		console.log('shoot, x, y, angle = ', x, y, angle);
+		// console.log('shoot, x, y, angle = ', x, y, angle);
 
 		ig.game.network.room.send({
 			type: 'shoot',
@@ -180,7 +180,7 @@ EntityBlastRadius = ig.Entity.extend({
 	draw: function() {},
 
 	check: function( other ) {
-		console.log(this.shooterId, other.enemyId);
+		// console.log(this.shooterId, other.enemyId);
 		if (this.shooterId === other.enemyId) {
 			return;
 		}
