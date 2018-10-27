@@ -13,7 +13,7 @@ ig.module(
 
             size: { x: 16, y: 16 },
             friction: { x: 100, y: 100 },
-            scale: 1,
+            scale: 0.5,
 
             health: 1,
             damage: 10,
@@ -29,13 +29,13 @@ ig.module(
             seenPlayer: false,
 
 
-            animSheet: new ig.AnimationSheet('media/blob.png', 64, 64),
+            animSheet: new ig.AnimationSheet('media/ghost.png', 128, 128),
 
             init: function (x, y, settings) {
                 this.parent(x, y, settings);
                 var crawFrameTime = 0.04 + Math.random() * 0.02;
 
-                this.addAnim('crawl', 0.04, [0, 1, 2, 3, 4, 5, 4, 3, 2, 1]);
+                this.addAnim('crawl', 0.12, [0, 1, 2, 1]);
                 // this.currentAnim.gotoRandomFrame();
 
                 // this.hurtTimer = new ig.Timer();
