@@ -11,7 +11,7 @@ ig.module(
 	'plugins.touch-field',
 	'plugins.gamepad',
 
-	'game.levels.base2',
+	'game.levels.base1',
 	'game.entities.enemy-blob',
 	'game.entities.enemy-player',
 
@@ -129,8 +129,8 @@ var MyGame = tpf.Game.extend({
 		this.powerupSpawnTimer = new ig.Timer(this.powerupSpawnWait);
 
 		// Load the last level we've been in or the default Base1
-		// this.loadLevel( this.lastLevel || LevelBase1 );
-		this.loadLevel( this.lastLevel || LevelBase2 );
+		this.loadLevel( this.lastLevel || LevelBase1 );
+		// this.loadLevel( this.lastLevel || LevelBase2 );
 
 		this.spawnPlayer();
 
@@ -325,6 +325,13 @@ var MyGame = tpf.Game.extend({
 	},
 
 	showDeathAnim: function() {
+		ig.game.network.room.send({
+			type: 'position',
+			data: {
+				x: -100000,
+				y: -100000
+			}
+		});
 		this.deathAnimTimer = new ig.Timer( 1 );
 	},
 
