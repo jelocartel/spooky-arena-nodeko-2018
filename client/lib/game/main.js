@@ -97,6 +97,7 @@ var MyGame = tpf.Game.extend({
 	},
 
 	moveEnemies(state) {
+		if(!ig.game.myId) return;
 		const alreadySpawnedEnemies = Object.keys(ig.game.enemies);
 		Object.entries(state.players).forEach(([id, position]) => {
 
