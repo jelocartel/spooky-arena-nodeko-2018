@@ -55,6 +55,12 @@ ig.module(
                     console.log("server just sent this message:");
                     console.log(message.data);
                     ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle, shooterId: message.shooter} );
+                } else if (message.type === 'killed') {
+                    console.log('killed event = ', message.data)
+                    if(ig.game.player.enemyId === message.data.id) {
+                        ig.game.player.kill();
+                    }
+                    
                 }
               });
 
