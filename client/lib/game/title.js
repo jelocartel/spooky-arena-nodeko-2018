@@ -1,5 +1,5 @@
-ig.module( 
-	'game.title' 
+ig.module(
+	'game.title'
 )
 .requires(
 	'plugins.twopointfive.font',
@@ -20,7 +20,7 @@ MyTitle = ig.Class.extend({
 	title: null,
 	background: null,
 	timer: null,
-	
+
 	init: function() {
 		// Create the tile for the title image
 		this.title = new tpf.HudTile( this.titleImage, 0, this.titleImage.width, this.titleImage.height);
@@ -29,7 +29,7 @@ MyTitle = ig.Class.extend({
 		// Create an empty quad with a dark blue color as the background
 		this.background = new tpf.Quad(this.width, this.height);
 		this.background.setPosition(this.width/2, this.height/2,0)
-		this.background.setColor({r:0.16, g:0.3, b:0.5});
+		this.background.setColor({r:0, g:0, b:0});
 
 
 		this.camera = new tpf.OrthoCamera(this.width, this.height);
