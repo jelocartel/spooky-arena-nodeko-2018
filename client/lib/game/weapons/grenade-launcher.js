@@ -9,14 +9,14 @@ ig.module(
 .defines(function(){
 
 WeaponGrenadeLauncher = Weapon.extend({
-	offset: {x: 0, y: 128},
+	offset: {x: -30, y: 258},
 	// projectileOffset: -8,
-
+	scale: 4,
 	maxAmmo: 80,
 
 	cooldown: 0.5,
 
-	animSheet: new ig.AnimationSheet( 'media/grenade-launcher.png', 180, 134),
+	animSheet: new ig.AnimationSheet( 'media/cat.png', 360, 268),
 	shootSound: new ig.Sound( 'media/sounds/grenade-launcher.*' ),
 	emptySound: new ig.Sound( 'media/sounds/empty-click.*' ),
 	ammoIconImage: new ig.Image( 'media/grenade.png' ),
@@ -85,7 +85,7 @@ EntityGrenade = tpf.Entity.extend({
 		this.vel.z = 1.2;
 		this.pos.z = 12;
 	},
-	
+
 	reset: function( x, y, settings ) {
 		this.parent(x,y,settings);
 		this.vel.x = -Math.sin(this.angle) * this.speed;
@@ -102,7 +102,7 @@ EntityGrenade = tpf.Entity.extend({
 		}
 
 		var zvel = this.vel.z;
-		
+
 		this.parent();
 
 		// If the z-velocity did invert in the parent update, we bounced
@@ -143,29 +143,29 @@ EntityGrenade = tpf.Entity.extend({
 ig.EntityPool.enableFor(EntityGrenade);
 
 
-// This invisible entity will spawn and immediately die a frame later. It will 
+// This invisible entity will spawn and immediately die a frame later. It will
 // give every other entity it touches a bit of damage.
 EntityBlastRadius = ig.Entity.extend({
 	frame: 0,
 	radius: 8,
 	damage: 20,
 	checkAgainst: ig.Entity.TYPE.B,
-	
+
 	init: function( x, y, settings ) {
 		var offset = settings.radius || this.radius;
 		this.size.x = this.size.y = offset * 2;
 		this.parent( x - offset, y - offset, settings );
 	},
-	
+
 	update: function() {
 		if( this.frame == 2 ) {
 			this.kill();
 		}
 		this.frame++;
 	},
-	
+
 	draw: function() {},
-	
+
 	check: function( other ) {
 		if( this.frame != 1 ) { return; }
 
@@ -194,7 +194,7 @@ EntityGrenadeExplosion = tpf.Entity.extend({
 
 		this.pos.z = Math.random() * 20;
 	},
-	
+
 	reset: function(x,y,settings) {
 		this.currentAnim.rewind();
 		this.parent(x,y,settings);
