@@ -1,12 +1,12 @@
 ig.module( 'game.levels.base1' )
-.requires( 'impact.image','game.entities.player','game.entities.void' )
+.requires( 'impact.image','game.entities.player','game.entities.void','game.entities.enemy-player' )
 .defines(function(){
 LevelBase1=/*JSON[*/{
 	"entities": [
 		{
 			"type": "EntityPlayer",
-			"x": 1010,
-			"y": 818
+			"x": 888,
+			"y": 860
 		},
 		{
 			"type": "EntityVoid",
@@ -18,6 +18,11 @@ LevelBase1=/*JSON[*/{
 				"fogFar": 512,
 				"name": "info"
 			}
+		},
+		{
+			"type": "EntityEnemyPlayer",
+			"x": 1016,
+			"y": 504
 		}
 	],
 	"layer": [

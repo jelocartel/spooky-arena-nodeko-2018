@@ -1,18 +1,19 @@
-ig.module( 
-	'game.main' 
+ig.module(
+	'game.main'
 )
 .requires(
 	'impact.game',
 	'impact.font',
 
-	'plugins.twopointfive.game',	
-	
+	'plugins.twopointfive.game',
+
 	'plugins.touch-button',
 	'plugins.touch-field',
 	'plugins.gamepad',
 
 	'game.levels.base1',
 	'game.entities.enemy-blob',
+	'game.entities.enemy-player',
 
 	'game.entities.grenade-pickup',
 	'game.entities.health-pickup',
@@ -24,7 +25,7 @@ ig.module(
 	// ,'plugins.twopointfive.debug'
 )
 .defines(function(){ "use strict";
-	
+
 
 var MyGame = tpf.Game.extend({
 	sectorSize: 4,
@@ -32,7 +33,7 @@ var MyGame = tpf.Game.extend({
 
 	dead: false,
 	menu: null,
-	
+
 	touchButtons: null,
 	touchFieldMove: null,
 	touchFieldTurn: null,
@@ -47,7 +48,7 @@ var MyGame = tpf.Game.extend({
 
 	powerupSpawnWait: 8,
 	powerupSpawnTimer: null,
-	
+
 	init: function() {
 		// Setup HTML Checkboxes and mouse lock on click
 		if( !ig.ua.mobile ) {
@@ -73,16 +74,16 @@ var MyGame = tpf.Game.extend({
 				ig.system.requestMouseLock();
 			});
 		}
-		
+
 		// Setup Controls
 		ig.input.bind( ig.KEY.MOUSE1, 'click' );
-		if( ig.ua.mobile ) { 
-			this.setupTouchControls(); 
+		if( ig.ua.mobile ) {
+			this.setupTouchControls();
 		}
-		else { 
-			this.setupDesktopControls(); 
+		else {
+			this.setupDesktopControls();
 		}
-		
+
 
 		this.setTitle();
 	},
@@ -104,29 +105,29 @@ var MyGame = tpf.Game.extend({
 		// Load the last level we've been in or the default Base1
 		this.loadLevel( this.lastLevel || LevelBase1 );
 	},
-	
+
 	setupDesktopControls: function() {
 		// Setup keyboard & mouse controls
 		ig.input.bind( ig.KEY.UP_ARROW, 'forward' );
 		ig.input.bind( ig.KEY.LEFT_ARROW, 'left' );
 		ig.input.bind( ig.KEY.DOWN_ARROW, 'back' );
 		ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
-		
+
 		ig.input.bind( ig.KEY.C, 'shoot' );
 		ig.input.bind( ig.KEY.ENTER, 'shoot' );
 		ig.input.bind( ig.KEY.X, 'run' );
 		ig.input.bind( ig.KEY.V, 'weaponNext' );
 
 		ig.input.bind( ig.KEY.ESC, 'pause' );
-		
+
 		ig.input.bind( ig.KEY.W, 'forward' );
 		ig.input.bind( ig.KEY.A, 'stepleft' );
 		ig.input.bind( ig.KEY.S, 'back' );
 		ig.input.bind( ig.KEY.D, 'stepright' );
-		
+
 		ig.input.bind( ig.KEY.SHIFT, 'run' );
 		ig.input.bind( ig.KEY.CTRL, 'shoot' );
-		
+
 		ig.input.bind( ig.KEY.MOUSE2, 'run' );
 		ig.input.bind( ig.KEY.MWHEEL_UP, 'weaponNext' );
 		ig.input.bind( ig.KEY.MWHEEL_DOWN, 'weaponPrev' );
@@ -156,7 +157,7 @@ var MyGame = tpf.Game.extend({
 			new ig.TouchButton( 'shoot', {right: 0, bottom: 0}, ig.system.width/2, ig.system.height/4 )
 		]);
 		this.touchButtons.align();
-		
+
 		this.touchFieldMove = new ig.TouchField(0, 0, ig.system.width/2, ig.system.height);
 		this.touchFieldTurn = new ig.TouchField(ig.system.width/2, 0, ig.system.width/2, ig.system.height/4*3);
 	},
@@ -191,7 +192,7 @@ var MyGame = tpf.Game.extend({
 		this.floorMap = this.getMapByName('floor');
 	},
 
-	
+
 	update: function() {
 		// Reset tracking position for WebVR on button press
 		if( ig.input.pressed('reset-tracking') && ig.system.renderer instanceof tpf.StereoRenderer ) {
@@ -203,7 +204,7 @@ var MyGame = tpf.Game.extend({
 			this.menu.update();
 			return;
 		}
-		
+
 		if( this.dead ) {
 			// Wait for keypress if we are dead
 			if( ig.input.released('shoot') || (!ig.ua.mobile && ig.input.released('click')) ) {
@@ -212,9 +213,9 @@ var MyGame = tpf.Game.extend({
 		}
 		else {
 			// Is it time to spawn another Blob?
-			if( this.blobSpawnTimer.delta() > 0 ) {
-				this.spawnBlob();
-			}
+			// if( this.blobSpawnTimer.delta() > 0 ) {
+			// 	this.spawnBlob();
+			// }
 			if( this.powerupSpawnTimer.delta() > 0 ) {
 				this.spawnPowerup();
 			}
@@ -222,7 +223,7 @@ var MyGame = tpf.Game.extend({
 
 		// Update all entities and backgroundMaps
 		this.parent();
-		
+
 		// Roll the death animation; just move the camera down a bit.
 		if( this.deathAnimTimer ) {
 			var delta = this.deathAnimTimer.delta();
@@ -271,19 +272,19 @@ var MyGame = tpf.Game.extend({
 
 	getRandomSpawnPos: function() {
 		// This randomly probes the floor map and stops at the first tile
-		// that is set. If the floor map is empty, this results in an 
+		// that is set. If the floor map is empty, this results in an
 		// endless loop, so... better have a floor map in your level!
 		var ts = this.floorMap.tilesize;
 		while( true ) {
 			var x = ((Math.random() * this.floorMap.width)|0) * ts + ts/2,
 				y = ((Math.random() * this.floorMap.height)|0) * ts + ts/2;
-			
-			if( this.floorMap.getTile(x, y) ) {				
+
+			if( this.floorMap.getTile(x, y) ) {
 				return { x: x, y:y };
 			}
 		}
 	},
-	
+
 	showDeathAnim: function() {
 		this.deathAnimTimer = new ig.Timer( 1 );
 	},
@@ -306,7 +307,7 @@ var MyGame = tpf.Game.extend({
 });
 
 
-document.body.className = 
+document.body.className =
 	(ig.System.hasWebGL() ? 'webgl' : 'no-webgl') + ' ' +
 	(ig.ua.mobile ? 'mobile' : 'desktop');
 
@@ -318,7 +319,7 @@ if( window.Ejecta ) {
 	var canvas = ig.$('#canvas');
 	width = window.innerWidth;
 	height = window.innerHeight;
-	
+
 	canvas.style.width = window.innerWidth + 'px';
 	canvas.style.height = window.innerHeight + 'px';
 }
