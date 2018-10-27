@@ -95,6 +95,8 @@ EntityGrenade = tpf.Entity.extend({
 		this.vel.y = -Math.cos(this.angle) * this.speed;
 		this.vel.z = 1.2;
 		this.pos.z = 12;
+
+		this.shooterId = settings.shooterId;
 	},
 
 	reset: function( x, y, settings ) {

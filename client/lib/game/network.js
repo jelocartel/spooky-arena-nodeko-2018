@@ -53,7 +53,7 @@ ig.module(
                 if (message.type === 'shoot') {
                     console.log("server just sent this message:");
                     console.log(message.data);
-                    ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle} );
+                    ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle, shooterId: message.shooter} );
                 }
               });
               
