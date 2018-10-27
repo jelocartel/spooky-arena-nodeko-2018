@@ -45,11 +45,21 @@ WeaponGrenadeLauncher = Weapon.extend({
 	},
 
 	shoot: function( x, y, angle ) {
-		// const a = ig.game.spawnEntity(EntityGrenade, x, y, {angle: angle} );
+		const a = ig.game.spawnEntity(EntityGrenade, x, y, {angle: angle} );
 		this.currentAnim = this.anims.shoot.rewind();
 		this.shootSound.play();
 
 		this.flash(0.2);
+		console.log('shoot, x, y, angle = ', x, y, angle);
+
+		ig.game.network.room.send({
+			type: 'shoot',
+			data: {
+				x: x,
+				y: y,
+				angle: angle
+			}
+		});
 	}
 });
 
