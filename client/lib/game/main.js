@@ -102,7 +102,8 @@ var MyGame = tpf.Game.extend({
 		Object.entries(state.players).forEach(([id, position]) => {
 
 			if (id === ig.game.myId) {
-				// this is us, so don't do anything
+				ig.game.blobKillCount = position.kills;
+				// this is us, so don't do anything else
 				return;
 			}
 
