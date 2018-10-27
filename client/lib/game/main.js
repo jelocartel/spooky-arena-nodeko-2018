@@ -20,15 +20,11 @@ ig.module(
 
 
 	'game.title',
-	'game.hud'
-
+	'game.hud',
+	'game.network'
 	// ,'plugins.twopointfive.debug'
 )
 .defines(function(){ "use strict";
-
-const gameClient = new Colyseus.Client('ws://localhost:2657')
-
-let room = gameClient.join("default");
 
 var MyGame = tpf.Game.extend({
 	sectorSize: 4,
@@ -89,10 +85,15 @@ var MyGame = tpf.Game.extend({
 
 
 		this.setTitle();
+		this.setNetwork();
 	},
 
 	setTitle: function() {
 		this.menu = new MyTitle();
+	},
+
+	setNetwork() {
+		ig.game.network = new Network();
 	},
 
 	setGame: function() {
@@ -108,29 +109,7 @@ var MyGame = tpf.Game.extend({
 		// Load the last level we've been in or the default Base1
 		this.loadLevel( this.lastLevel || LevelBase1 );
 
-		gameClient.onOpen.add(function () {
-			console.log("connection is now open");
-		});
-
-		gameClient.onClose.add(function () {
-			console.log("connection has been closed");
-		});
-
-		room.listen("players/:id", (change) => {
-			if (change.operation === "add") {
-				console.log("new player added to the state");
-				console.log("player id:", change.path.id);
-				console.log("player data:", change.value);
-
-			} else if (change.operation === "remove") {
-				console.log("player has been removed from the state");
-				console.log("player id:", change.path.id);
-			}
-		});
-
-		room.onStateChange.add(function (state) {
-			console.log("the room state has been updated:", state);
-		});
+		ig.game.network.attachListeners();
 	},
 
 	setupDesktopControls: function() {
