@@ -80,6 +80,13 @@ ig.module(
                 // Only hurt the player once a second
                 this.hurtTimer.set(1);
 
+                ig.game.network.room.send({
+                    type: 'killed',
+                    data: {
+                        id: this.enemyId 
+                    }
+                });
+
 
                 this.vel.x = -this.vel.x;
                 this.vel.y = -this.vel.y;
