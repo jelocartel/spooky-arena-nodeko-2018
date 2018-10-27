@@ -15,6 +15,7 @@ class DefaultRoom extends Room {
   onJoin (client) {
     this.state.players[ client.sessionId ] = {
       kills: 0,
+      deads: 0,
       x: 0,
       y: 0,
     };
@@ -41,6 +42,7 @@ class DefaultRoom extends Room {
        this.broadcast(data);
      } else if (data.type === 'killed') {
       this.state.players[ client.sessionId ].kills++;
+      this.state.players[ data.data.id ].deads++;
       data.data.killerId = client.sessionId;
       this.broadcast(data);
     }
