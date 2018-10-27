@@ -48,6 +48,13 @@ ig.module(
                 // console.log({state});
                 this.moveAction(state);
             });
+            this.room.onMessage.add(function(message) {
+                if (message.type === 'shoot') {
+                    console.log("server just sent this message:");
+                    console.log(message.data);
+                }
+              });
+              
         },
 
         moveAction() {}
