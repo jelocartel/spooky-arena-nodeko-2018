@@ -230,6 +230,7 @@ var MyGame = tpf.Game.extend({
 
 	spawnEnemy(id, x, y) {
 		ig.game.enemies[id] = this.spawnEntity(EntityEnemyPlayer, x, y);
+		ig.game.enemies[id].enemyId = id;
 	},
 
 	update: function() {
