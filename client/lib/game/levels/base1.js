@@ -1,13 +1,8 @@
 ig.module( 'game.levels.base1' )
-.requires( 'impact.image','game.entities.player','game.entities.void','game.entities.enemy-player' )
+.requires( 'impact.image','game.entities.void' )
 .defines(function(){
 LevelBase1=/*JSON[*/{
 	"entities": [
-		// {
-		// 	"type": "EntityPlayer",
-		// 	"x": 888,
-		// 	"y": 860
-		// },
 		{
 			"type": "EntityVoid",
 			"x": 1144,
@@ -19,12 +14,6 @@ LevelBase1=/*JSON[*/{
 				"name": "info"
 			}
 		}
-		//,
-		// {
-		// 	"type": "EntityEnemyPlayer",
-		// 	"x": 1016,
-		// 	"y": 504
-		// }
 	],
 	"layer": [
 		{
@@ -79,7 +68,7 @@ LevelBase1=/*JSON[*/{
 			"width": 32,
 			"height": 32,
 			"linkWithCollision": false,
-			"visible": 0,
+			"visible": 1,
 			"tilesetName": "",
 			"repeat": false,
 			"preRender": false,
@@ -148,8 +137,8 @@ LevelBase1=/*JSON[*/{
 				[0,0,0,0,0,6,0,0,0,16,0,0,0,7,22,0,0,22,7,0,0,0,0,0,22,30,22,29,16,22,0,0],
 				[0,0,0,0,0,6,0,0,0,16,0,0,7,0,0,0,0,0,0,7,0,0,0,13,0,0,0,0,0,0,16,0],
 				[0,0,0,0,0,7,0,0,0,22,24,24,22,0,0,0,0,0,0,22,24,24,24,23,0,0,0,0,0,0,30,0],
-				[0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,0,14,14,0,0,15,0],
-				[0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,0,14,14,0,0,15,0],
+				[0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,14,14,0,0,32,0,0,0,0,0,0,14,14,0,0,15,0],
+				[0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,14,14,0,0,32,0,0,0,0,0,0,14,14,0,0,15,0],
 				[0,0,0,0,0,22,0,0,0,22,24,24,22,0,0,0,0,0,0,22,24,24,24,23,0,0,0,0,0,0,22,0],
 				[0,0,0,0,0,7,0,0,0,7,0,0,7,0,0,0,0,0,0,7,0,0,0,13,0,0,0,0,0,0,13,0],
 				[0,0,0,0,0,0,7,15,7,0,0,0,0,7,22,0,0,22,7,0,0,8,8,29,13,13,0,0,13,29,0,0],
@@ -173,7 +162,7 @@ LevelBase1=/*JSON[*/{
 			"width": 32,
 			"height": 32,
 			"linkWithCollision": false,
-			"visible": 1,
+			"visible": 0,
 			"tilesetName": "media/tiles/basic-tiles-64.png",
 			"repeat": false,
 			"preRender": false,
