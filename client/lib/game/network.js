@@ -38,7 +38,7 @@ ig.module(
             });
 
             this.room.onStateChange.add(function (state) {
-
+                console.log({state});
             });
         }
     });

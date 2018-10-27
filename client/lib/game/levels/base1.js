@@ -3,11 +3,11 @@ ig.module( 'game.levels.base1' )
 .defines(function(){
 LevelBase1=/*JSON[*/{
 	"entities": [
-		{
-			"type": "EntityPlayer",
-			"x": 888,
-			"y": 860
-		},
+		// {
+		// 	"type": "EntityPlayer",
+		// 	"x": 888,
+		// 	"y": 860
+		// },
 		{
 			"type": "EntityVoid",
 			"x": 1144,

@@ -83,7 +83,6 @@ var MyGame = tpf.Game.extend({
 			this.setupDesktopControls();
 		}
 
-
 		this.setTitle();
 		this.setNetwork();
 	},
@@ -100,7 +99,7 @@ var MyGame = tpf.Game.extend({
 		this.menu = null;
 		this.dead = false;
 		this.hud = new MyHud( 640, 480 );
-
+		// console.log('eeee', spawnPlayer)
 		this.blobKillCount = 0;
 		this.blobSpawnWaitInitial = this.blobSpawnWaitInitial;
 		this.blobSpawnTimer = new ig.Timer(this.blobSpawnWaitInitial);
@@ -108,6 +107,8 @@ var MyGame = tpf.Game.extend({
 
 		// Load the last level we've been in or the default Base1
 		this.loadLevel( this.lastLevel || LevelBase1 );
+
+		this.spawnPlayer();
 
 		ig.game.network.attachListeners();
 	},
@@ -198,6 +199,10 @@ var MyGame = tpf.Game.extend({
 		this.floorMap = this.getMapByName('floor');
 	},
 
+	spawnPlayer() {
+		const position = this.getRandomSpawnPos();
+		this.spawnEntity(EntityPlayer, position.x, position.y);
+	},
 
 	update: function() {
 		// Reset tracking position for WebVR on button press
@@ -301,6 +306,7 @@ var MyGame = tpf.Game.extend({
 
 	drawHud: function() {
 		ig.system.renderer.hudFreelook = false;
+		window.pl = this.player;
 		if( this.player ) {
 			ig.game.hud.draw(this.player, this.player.currentWeapon);
 		}
