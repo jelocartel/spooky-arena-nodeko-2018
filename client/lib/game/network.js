@@ -17,8 +17,10 @@ ig.module(
 
         attachListeners() {
 
-            this.gameClient.onOpen.add(function () {
-                console.log("connection is now open");
+            ig.game.myId = this.room.sessionId;
+
+            this.gameClient.onOpen.add(function (a) {
+                console.log("connection is now open", a);
             });
 
             this.gameClient.onClose.add(function () {
@@ -35,6 +37,10 @@ ig.module(
                     console.log("player has been removed from the state");
                     console.log("player id:", change.path.id);
                 }
+            });
+
+            this.room.onJoin.add((e) => {
+                console.log('join', {e});
             });
 
             this.room.onStateChange.add(function (state) {

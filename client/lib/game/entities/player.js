@@ -218,10 +218,10 @@ EntityPlayer = tpf.Entity.extend({
 			ig.system.camera.setPosition( cx, cy, bobOffset );
 		}
 
-		// ig.game.network.room.send({
-		// 	x: cx,
-		// 	y: cy
-		// });
+		ig.game.network.room.send({
+			x: cx,
+			y: cy
+		});
 	},
 
 	receiveDamage: function( amount, from ) {

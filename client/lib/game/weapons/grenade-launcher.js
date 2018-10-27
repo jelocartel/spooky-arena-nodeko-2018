@@ -19,7 +19,7 @@ WeaponGrenadeLauncher = Weapon.extend({
 	animSheet: new ig.AnimationSheet( 'media/cat.png', 360, 268),
 	shootSound: new ig.Sound( 'media/sounds/cat.*' ),
 	emptySound: new ig.Sound( 'media/sounds/empty-click.*' ),
-	ammoIconImage: new ig.Image( 'media/grenade.png' ),
+	ammoIconImage: new ig.Image( 'media/ammo_tile.png' ),
 	ammoIcon: null,
 
 	init: function( ammo ) {
@@ -28,7 +28,8 @@ WeaponGrenadeLauncher = Weapon.extend({
 		this.addAnim( 'shoot', 0.1, [1,0], true );
 
 		this.ammoIcon = new tpf.HudTile( this.ammoIconImage, 0, 32, 32);
-		this.ammoIcon.setPosition( 200, 460)
+		this.ammoIcon.setPosition( 200, 460);
+		this.ammoIcon.scale = 0.5;
 		this.shootSound.volume = 0.8;
 	},
 
