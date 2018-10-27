@@ -70,7 +70,7 @@ ig.module(
             },
 
             check: function (other) {
-                if (other.shooterId === this.enemyId) {return;}
+                if (other.shooterId === this.enemyId || other.enemyId) {return;}
                 if (this.hurtTimer && this.hurtTimer.delta() < 0) {
                     // Player already hurt during this attack move?
                     return;
@@ -82,7 +82,7 @@ ig.module(
                 ig.game.network.room.send({
                     type: 'killed',
                     data: {
-                        id: this.enemyId 
+                        id: this.enemyId
                     }
                 });
 
