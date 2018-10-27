@@ -3,7 +3,7 @@ ig.module(
 )
 .requires(
 	'impact.loader',
-	
+
 	'plugins.twopointfive.namespace',
 	'plugins.twopointfive.renderer.renderer'
 )
@@ -58,7 +58,7 @@ tpf.Loader = ig.Loader.extend({
 			this.createGeometry();
 		}
 
-		this.rotation += 0.2 * this.status * this.status;
+		this.rotation += 0.05 * this.status * this.status;
 		ig.system.renderer.render(this.renderCallback.bind(this));
 	},
 
@@ -72,7 +72,7 @@ tpf.Loader = ig.Loader.extend({
 		camera.position[2] = Math.sin(this.rotation) * 20;
 		camera.rotation[1] = -this.rotation + Math.PI/2;
 		renderer.setCamera(camera);
-		
+
 		for( var i = 0; i < this.blockFaces.length; i++ ) {
 			var c = (Math.sin(this.rotation - (i+1.2) * Math.PI/2)+1)/2;
 			this.blockFaces[i].quad.setColor({r:c,g:c,b:c});
