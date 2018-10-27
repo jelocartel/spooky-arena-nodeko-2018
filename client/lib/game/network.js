@@ -52,8 +52,6 @@ ig.module(
             });
             this.room.onMessage.add(function(message) {
                 if (message.type === 'shoot') {
-                    console.log("server just sent this message:");
-                    console.log(message.data);
                     if (message.shooter !== ig.game.player.enemyId) {
                         ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle, shooterId: message.shooter} );
                     }
