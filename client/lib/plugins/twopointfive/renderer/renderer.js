@@ -28,11 +28,11 @@ tpf.Renderer = ig.Class.extend({
 	init: function( canvas ) {
 		this.canvas = canvas;
 		var webglOptions = {
-			alpha: false, 
-			premultipliedAlpha: false, 
-			antialias: false, 
-			stencil: false, 
-			preserveDrawingBuffer: true 
+			alpha: false,
+			premultipliedAlpha: false,
+			antialias: false,
+			stencil: false,
+			preserveDrawingBuffer: true
 		};
 
 		this.gl = canvas.getContext( 'webgl', webglOptions);
@@ -64,15 +64,15 @@ tpf.Renderer = ig.Class.extend({
 			this.setProgram( this.programFog, true );
 
 			this.fog = {
-				color: color, 
-				near: near, 
+				color: color,
+				near: near,
 				far: far
 			};
 
 			var c1 = ((color & 0xff0000) >> 16)/255,
 				c2 = ((color & 0x00ff00) >> 8)/255,
 				c3 = ((color & 0x0000ff) >> 0)/255;
-			
+
 			this.gl.uniform3f(this.program.uniform.fogColor, c1, c2, c3);
 			this.gl.uniform1f(this.program.uniform.fogNear, near);
 			this.gl.uniform1f(this.program.uniform.fogFar, far);
@@ -94,9 +94,9 @@ tpf.Renderer = ig.Class.extend({
 			this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, width, height, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, img);
 		}
 		else {
-			this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, img);	
+			this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, img);
 		}
-		
+
 		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
 
@@ -109,9 +109,9 @@ tpf.Renderer = ig.Class.extend({
 	},
 
 	clear: function( color, depth, stencil ) {
-		this.gl.clear( 
-			(color ? this.gl.COLOR_BUFFER_BIT : 0) | 
-			(depth ? this.gl.DEPTH_BUFFER_BIT : 0) | 
+		this.gl.clear(
+			(color ? this.gl.COLOR_BUFFER_BIT : 0) |
+			(depth ? this.gl.DEPTH_BUFFER_BIT : 0) |
 			(stencil ? this.gl.STENCIL_BUFFER_BIT : 0)
 		);
 	},
@@ -151,7 +151,7 @@ tpf.Renderer = ig.Class.extend({
 		if( this.wireframe ) {
 			this.clear(true,true,true)
 		}
-		
+
 		callback(this);
 
 		this.flush();
@@ -172,7 +172,7 @@ tpf.Renderer = ig.Class.extend({
 				this.gl.enable(this.gl.DEPTH_TEST);
 			}
 			else {
-				this.gl.disable(this.gl.DEPTH_TEST);	
+				this.gl.disable(this.gl.DEPTH_TEST);
 			}
 		}
 	},
@@ -187,12 +187,12 @@ tpf.Renderer = ig.Class.extend({
 		this.texture = texture;
 		this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
 	},
-	
+
 	setProgram: function(program, force) {
 		if( program == this.program && !force ) {
 			return;
 		}
-		
+
 		this.flush();
 		this.program = program;
 		this.gl.useProgram(this.program.program);

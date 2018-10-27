@@ -13,7 +13,7 @@ ig.module(
 
             size: { x: 16, y: 16 },
             friction: { x: 100, y: 100 },
-            scale: 0.5,
+            scale: 1,
 
             health: 10,
             damage: 10,
@@ -53,6 +53,8 @@ ig.module(
                 //     this.vel.x *= -1;
                 //     this.vel.y *= -1;
                 // }
+
+                this.angle = this.angleTo(ig.game.player);
 
                 this.parent();
             },

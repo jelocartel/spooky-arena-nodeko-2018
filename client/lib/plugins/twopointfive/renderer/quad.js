@@ -10,7 +10,7 @@ ig.module(
 // on the screen is drawn through a Quad or, like the tpf.TileMesh,
 // is generated from Quads.
 
-// A Quad has 6 vertices, each with an an x, y, z position, 
+// A Quad has 6 vertices, each with an an x, y, z position,
 // u, v texture coordinates and rgba colors.
 
 // Each Quad comes with its own 54 element Float32Array:
@@ -31,7 +31,7 @@ tpf.Quad = function( width, height, texture ) {
 	this.width = width || 1;
 	this.height = height || 1;
 	this.color = {r:1, g:1, b:1, a:1};
-	
+
 	this.position = vec3.create();
 	this.rotation = vec3.create();
 
@@ -53,7 +53,7 @@ tpf.Quad = function( width, height, texture ) {
 		var vp = this._vertsPos;
 		var rot = this.rotation;
 		var m = mat4.identity(tpf.Quad._workMatrix);
-		
+
 		var sx2 = this.width/2,
 			sy2 = this.height/2;
 
@@ -64,7 +64,7 @@ tpf.Quad = function( width, height, texture ) {
 		vp[3][0] = sx2; vp[3][1] = sy2; vp[3][2] = 0; // bottom right
 		// vp[4] = vp[2] = bottom left; set after transform
 		// vp[5] = vp[1] = top right; set after transform
-		
+
 		mat4.translate(m, m, this.position);
 		if( rot[0] ) { mat4.rotateX(m, m, rot[0]); }
 		if( rot[1] ) { mat4.rotateY(m, m, rot[1]); }
@@ -151,7 +151,7 @@ tpf.Quad = function( width, height, texture ) {
 };
 
 // This class method is essentially the same as the setUV() instance method,
-// but takes a buffer and offset instead of operating on the instance's 
+// but takes a buffer and offset instead of operating on the instance's
 // vertices directly.
 
 // This is used by tpf.TileMeshes to directly update UV coordinates for animted

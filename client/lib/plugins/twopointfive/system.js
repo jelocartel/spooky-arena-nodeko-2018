@@ -3,7 +3,7 @@ ig.module(
 )
 .requires(
 	'impact.system',
-	
+
 	'plugins.twopointfive.namespace',
 	'plugins.twopointfive.renderer.ortho-camera',
 	'plugins.twopointfive.renderer.perspective-camera',
@@ -17,7 +17,7 @@ ig.System.inject({
 	renderer: null,
 	scene: null,
 	camera: null,
-	
+
 	isFullscreen: false,
 	hasMouseLock: false,
 
@@ -26,22 +26,22 @@ ig.System.inject({
 	fov: 75,
 
 	stereoMode: false,
-	
+
 	init: function( canvasId, fps, width, height, scale ) {
 		this.initialWidth = width;
 		this.initialHeight = height;
-		
+
 		this.clock = new ig.Timer();
 		this.canvas = ig.$(canvasId);
 		this.canvas.width = width * ig.ua.pixelRatio;
 		this.canvas.height = height * ig.ua.pixelRatio;
 		this.canvas.style.width = width + 'px';
 		this.canvas.style.height = height + 'px';
-		
+
 		this.realWidth = this.width = width;
 		this.realHeight = this.height = height;
-		
-		this.renderer = new tpf.Renderer(canvas);	
+
+		this.renderer = new tpf.Renderer(canvas);
 		this.resize( width, height, scale );
 	},
 
@@ -53,23 +53,23 @@ ig.System.inject({
 
 		return this.fov * this.camera.aspect;
 	},
-	
+
 	resize: function( width, height, scale ) {
 		var r = ig.System.useRetina ? ig.ua.pixelRatio : 1;
-		
+
 		this.width = width;
 		this.height = height;
-		
+
 		this.realWidth = this.width = width;
 		this.realHeight = this.height = height;
 		this.canvas.width = width * r;
 		this.canvas.height = height * r;
-		
+
 		this.renderer.setSize( width * r, height * r );
 		this.canvas.style.width = width + 'px';
 		this.canvas.style.height = height + 'px';
-		
-		this.camera = new tpf.PerspectiveCamera( this.fov, width / height, 1, 10000 );
+
+		this.camera = new tpf.PerspectiveCamera( this.fov, width / height, 1, 1000 );
 	},
 
 	setStereoMode: function( on ) {
@@ -95,12 +95,12 @@ ig.System.inject({
 
 	setupFullscreenMouselockOnce: function() {
 		if( this.fullscreenSetupComplete ) { return; }
-		
-		
+
+
 		// Fuck yeah, Vendor Prefixes \o/
-		
+
 		// Request fullscreen
-		this.canvas.requestFullscreen = 
+		this.canvas.requestFullscreen =
 			ig.getVendorAttribute( this.canvas, 'requestFullscreen') ||
 			ig.getVendorAttribute( this.canvas, 'requestFullScreen'); // uppercase S (moz)
 
@@ -108,7 +108,7 @@ ig.System.inject({
 		document.addEventListener('fullscreenchange', fullscreenCallback, false);
 		document.addEventListener('mozfullscreenchange', fullscreenCallback, false);
 		document.addEventListener('webkitfullscreenchange', fullscreenCallback, false);
-		
+
 		// Request pointer lock
 		ig.normalizeVendorAttribute( this.canvas, 'requestPointerLock' );
 
@@ -119,7 +119,7 @@ ig.System.inject({
 
 		this.fullscreenSetupComplete = true;
 	},
-	
+
 	requestFullscreen: function() {
 		this.setupFullscreenMouselockOnce();
 		this.canvas.requestFullscreen(this.renderer.fullscreenFlags);
@@ -129,7 +129,7 @@ ig.System.inject({
 		this.setupFullscreenMouselockOnce();
 		this.canvas.requestPointerLock();
 	},
-	
+
 	fullscreenCallback: function( ev ) {
 		if(
 			document.webkitFullscreenElement === this.canvas ||
@@ -146,7 +146,7 @@ ig.System.inject({
 		}
 		return true;
 	},
-	
+
 	mouseLockCallback: function( ev ) {
 		this.hasMouseLock = (
 			document.pointerLockElement === this.canvas ||
@@ -154,7 +154,7 @@ ig.System.inject({
 			document.webkitPointerLockElement === this.canvas
 		);
 	},
-	
+
 	clear: function() {},
 });
 
@@ -162,7 +162,7 @@ ig.System.useRetina = true;
 
 ig.System._hasWebGL = null;
 ig.System.hasWebGL = function() {
-	if( ig.System._hasWebGL === null ) {	
+	if( ig.System._hasWebGL === null ) {
 		var canvas = document.createElement('canvas');
 		var gl = null;
 
@@ -178,4 +178,4 @@ ig.System.hasWebGL = function() {
 	return ig.System._hasWebGL;
 };
 
-});	
+});

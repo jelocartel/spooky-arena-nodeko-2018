@@ -6,7 +6,8 @@ ig.module(
 .defines(function () {
 
     Network = ig.Class.extend({
-        serverURL: 'ws://localhost:2657',
+        // serverURL: 'ws://localhost:2657',
+        serverURL: 'ws://192.168.2.66:2657',
         roomName: 'default',
 
 

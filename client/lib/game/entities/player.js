@@ -219,8 +219,8 @@ EntityPlayer = tpf.Entity.extend({
 		}
 
 		ig.game.network.room.send({
-			x: cx,
-			y: cy
+			x: this.pos.x,
+			y: this.pos.y
 		});
 	},
 

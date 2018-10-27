@@ -11,13 +11,14 @@ ig.module(
 	'plugins.touch-field',
 	'plugins.gamepad',
 
-	'game.levels.base1',
+	'game.levels.base2',
 	'game.entities.enemy-blob',
 	'game.entities.enemy-player',
 
 	'game.entities.grenade-pickup',
 	'game.entities.health-pickup',
 
+	'game.entities.player',
 
 	'game.title',
 	'game.hud',
@@ -99,7 +100,6 @@ var MyGame = tpf.Game.extend({
 	moveEnemies(state) {
 		const alreadySpawnedEnemies = Object.keys(ig.game.enemies);
 		Object.entries(state.players).forEach(([id, position]) => {
-			console.log(id, ig.game.myId);
 
 			if (id === ig.game.myId) {
 				// this is us, so don't do anything
@@ -128,7 +128,8 @@ var MyGame = tpf.Game.extend({
 		this.powerupSpawnTimer = new ig.Timer(this.powerupSpawnWait);
 
 		// Load the last level we've been in or the default Base1
-		this.loadLevel( this.lastLevel || LevelBase1 );
+		// this.loadLevel( this.lastLevel || LevelBase1 );
+		this.loadLevel( this.lastLevel || LevelBase2 );
 
 		this.spawnPlayer();
 
