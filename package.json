@@ -1,0 +1,24 @@
+{
+  "name": "nko2018-jelocartel",
+  "version": "1.0.0",
+  "description": ":skull: Spooky Arena :eyes: --- by [@jelocartel](https://github.com/jelocartel)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hackbit/nko2018-jelocartel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hackbit/nko2018-jelocartel/issues"
+  },
+  "homepage": "https://github.com/Hackbit/nko2018-jelocartel#readme",
+  "dependencies": {
+    "colyseus": "^0.9.17",
+    "colyseus.js": "^0.9.14",
+    "ws": "^6.1.0"
+  }
+}
