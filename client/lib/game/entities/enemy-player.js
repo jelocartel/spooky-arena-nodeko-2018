@@ -59,29 +59,30 @@ ig.module(
                 this.parent();
             },
 
-            // kill: function () {
-            //     var cx = this.pos.x + this.size.x / 2;
-            //     var cy = this.pos.y + this.size.y / 2;
-            //     for (var i = 0; i < 20; i++) {
-            //         ig.game.spawnEntity(EntityEnemyBlobGib, cx, cy);
-            //     }
-            //     ig.game.blobKillCount++;
-            //     this.parent();
-            // },
+            kill: function () {
+                var cx = this.pos.x + this.size.x / 2;
+                var cy = this.pos.y + this.size.y / 2;
+                for (var i = 0; i < 20; i++) {
+                    ig.game.spawnEntity(EntityEnemyBlobGib, cx, cy);
+                }
+                ig.game.blobKillCount++;
+                this.parent();
+            },
 
-            // check: function (other) {
-            //     if (this.hurtTimer.delta() < 0) {
-            //         // Player already hurt during this attack move?
-            //         return;
-            //     }
+            check: function (other) {
+                if (other.shooteId === this.enemyId) {return;}
+                if (this.hurtTimer.delta() < 0) {
+                    // Player already hurt during this attack move?
+                    return;
+                }
 
-            //     // Only hurt the player once a second
-            //     this.hurtTimer.set(1);
+                // Only hurt the player once a second
+                this.hurtTimer.set(1);
 
 
-            //     this.vel.x = -this.vel.x;
-            //     this.vel.y = -this.vel.y;
-            //     other.receiveDamage(this.damage, this);
-            // }
+                this.vel.x = -this.vel.x;
+                this.vel.y = -this.vel.y;
+                other.receiveDamage(this.damage, this);
+            }
         });
     });
