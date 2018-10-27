@@ -6,7 +6,7 @@ ig.module(
 )
 .defines(function () {
 
-    const WS_URL = window.location.href.replace(/^(http|https)\:\/\//,'ws://').replace(/\/$/, '');
+    const WS_URL = window.location.href.replace(/^http\:\/\//,'ws://').replace(/^https\:\/\//,'wss://').replace(/\/$/, '');
     console.log(WS_URL);
     Network = ig.Class.extend({
         serverURL: WS_URL,
