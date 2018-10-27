@@ -82,7 +82,7 @@ ig.module(
                 ig.game.network.room.send({
                     type: 'killed',
                     data: {
-                        id: this.enemyId 
+                        id: this.enemyId
                     }
                 });
 
