@@ -15,7 +15,7 @@ ig.module(
             friction: { x: 100, y: 100 },
             scale: 1,
 
-            health: 10,
+            health: 1,
             damage: 10,
 
             dynamicLight: true,
@@ -72,7 +72,7 @@ ig.module(
             check: function (other) {
                 console.log(other.shooterId, this.enemyId);
                 if (other.shooterId === this.enemyId) {return;}
-                if (this.hurtTimer.delta() < 0) {
+                if (this.hurtTimer && this.hurtTimer.delta() < 0) {
                     // Player already hurt during this attack move?
                     return;
                 }

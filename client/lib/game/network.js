@@ -8,7 +8,7 @@ ig.module(
 
     Network = ig.Class.extend({
         // serverURL: 'ws://localhost:2657',
-        serverURL: 'ws://192.168.2.66:8080',
+        serverURL: 'ws://192.168.2.66:2657',
         roomName: 'default',
 
 
@@ -18,8 +18,8 @@ ig.module(
         },
 
         attachListeners() {
-
-            ig.game.myId = this.room.sessionId;
+            // Ik this isn't `enemyId`, but let's stay consistent
+            ig.game.myId = ig.game.player.enemyId = this.room.sessionId;
 
             this.gameClient.onOpen.add(function (a) {
                 console.log("connection is now open", a);

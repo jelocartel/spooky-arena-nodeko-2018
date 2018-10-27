@@ -22,7 +22,7 @@ EntityPlayer = tpf.Entity.extend({
 	bobSpeed: 0.1,
 	bobHeight: 0.8,
 
-	health: 100,
+	health: 1,
 	maxHealth: 100,
 
 	weapons: [],
@@ -228,6 +228,9 @@ EntityPlayer = tpf.Entity.extend({
 	},
 
 	receiveDamage: function( amount, from ) {
+		if (ig.game.playerId === from.shooterId) {
+			return;
+		}
 		if( this.god || this._killed ) {
 			return;
 		}
