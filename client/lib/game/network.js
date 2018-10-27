@@ -6,9 +6,10 @@ ig.module(
 )
 .defines(function () {
 
+    const WS_URL = window.location.href.replace(/^(http|https)\:\/\//,'ws://').replace(/\/$/, '');
+    console.log(WS_URL);
     Network = ig.Class.extend({
-        // serverURL: 'ws://localhost:2657',
-        serverURL: 'ws://192.168.2.66:2657',
+        serverURL: WS_URL,
         roomName: 'default',
 
 
