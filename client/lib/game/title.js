@@ -34,6 +34,11 @@ MyTitle = ig.Class.extend({
 
 		this.camera = new tpf.OrthoCamera(this.width, this.height);
 		this.timer = new ig.Timer();
+		// Object.entries(ig.game.enemies || {}).forEach((enemy) => {
+		// 	enemy[1].kill();
+		// });
+
+		// ig.game.enemies = {};
 	},
 
 	update: function() {

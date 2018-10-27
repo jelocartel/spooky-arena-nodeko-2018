@@ -66,6 +66,7 @@ ig.module(
                     ig.game.spawnEntity(EntityEnemyBlobGib, cx, cy);
                 }
                 // ig.game.blobKillCount++;
+                delete ig.game.enemies[this.enemyId];
                 this.parent();
             },
 
