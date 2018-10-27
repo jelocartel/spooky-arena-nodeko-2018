@@ -73,7 +73,6 @@ tpf.Entity = ig.Entity.extend({
 	},
 
 	remove: function() {
-		console.log('remove');
 		ig.game.culledSectors.removeEntity(this);
 	},
 

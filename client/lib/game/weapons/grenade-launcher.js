@@ -147,7 +147,7 @@ EntityGrenade = tpf.Entity.extend({
 			ig.game.spawnEntity(EntityGrenadeExplosion, x, y );
 		}
 
-		ig.game.spawnEntity(EntityBlastRadius, this.pos.x, this.pos.y, this.blastSettings );
+		ig.game.spawnEntity(EntityBlastRadius, this.pos.x, this.pos.y, {shooterId: this.shooterId, ...this.blastSettings} );
 		this.explodeSound.play();
 		this.parent();
 	}
@@ -162,7 +162,7 @@ EntityBlastRadius = ig.Entity.extend({
 	frame: 0,
 	radius: 8,
 	damage: 20,
-	checkAgainst: ig.Entity.TYPE.B,
+	checkAgainst: ig.Entity.TYPE.BOTH,
 
 	init: function( x, y, settings ) {
 		var offset = settings.radius || this.radius;
@@ -180,6 +180,10 @@ EntityBlastRadius = ig.Entity.extend({
 	draw: function() {},
 
 	check: function( other ) {
+		console.log(this.shooterId, other.enemyId);
+		if (this.shooterId === other.enemyId) {
+			return;
+		}
 		if( this.frame != 1 ) { return; }
 
 		var f = 1 - (this.distanceTo(other) / this.radius); // normalize to 0..1 range

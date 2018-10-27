@@ -8,7 +8,7 @@ ig.module(
 
     Network = ig.Class.extend({
         // serverURL: 'ws://localhost:2657',
-        serverURL: 'ws://192.168.2.65:8080',
+        serverURL: 'ws://192.168.2.66:8080',
         roomName: 'default',
 
 
@@ -56,7 +56,7 @@ ig.module(
                     ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle, shooterId: message.shooter} );
                 }
               });
-              
+
         },
 
         moveAction() {}
