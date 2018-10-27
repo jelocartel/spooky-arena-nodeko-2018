@@ -4,7 +4,7 @@
   "description": ":skull: Spooky Arena :eyes: --- by [@jelocartel](https://github.com/jelocartel)",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "DEBUG=colyseus:* node server/index.js"
   },
   "repository": {
     "type": "git",
