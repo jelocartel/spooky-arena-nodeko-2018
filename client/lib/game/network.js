@@ -2,6 +2,7 @@ ig.module(
     'game.network'
 )
 .requires(
+    'game.weapons.grenade-launcher'
 )
 .defines(function () {
 
@@ -52,6 +53,7 @@ ig.module(
                 if (message.type === 'shoot') {
                     console.log("server just sent this message:");
                     console.log(message.data);
+                    ig.game.spawnEntity(EntityGrenade, message.data.x, message.data.y, {angle: message.data.angle} );
                 }
               });
               
