@@ -43,10 +43,13 @@ ig.module(
                 console.log('join', {e});
             });
 
-            this.room.onStateChange.add(function (state) {
-                console.log({state});
+            this.room.onStateChange.add((state) => {
+                // console.log({state});
+                this.moveAction(state);
             });
-        }
+        },
+
+        moveAction() {}
     });
 
 });

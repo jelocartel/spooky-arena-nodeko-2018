@@ -18,12 +18,13 @@ LevelBase1=/*JSON[*/{
 				"fogFar": 512,
 				"name": "info"
 			}
-		},
-		{
-			"type": "EntityEnemyPlayer",
-			"x": 1016,
-			"y": 504
 		}
+		//,
+		// {
+		// 	"type": "EntityEnemyPlayer",
+		// 	"x": 1016,
+		// 	"y": 504
+		// }
 	],
 	"layer": [
 		{

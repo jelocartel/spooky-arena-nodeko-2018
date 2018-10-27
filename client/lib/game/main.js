@@ -93,6 +93,28 @@ var MyGame = tpf.Game.extend({
 
 	setNetwork() {
 		ig.game.network = new Network();
+		ig.game.network.moveAction = this.moveEnemies.bind(this);
+	},
+
+	moveEnemies(state) {
+		const alreadySpawnedEnemies = Object.keys(ig.game.enemies);
+		Object.entries(state.players).forEach(([id, position]) => {
+			console.log(id, ig.game.myId);
+
+			if (id === ig.game.myId) {
+				// this is us, so don't do anything
+				return;
+			}
+
+			if (alreadySpawnedEnemies.includes(id)) {
+				// this enemy is already spawn, just move it
+				ig.game.enemies[id].pos.x = position.x;
+				ig.game.enemies[id].pos.y = position.y;
+			} else {
+				// This is new enemy, spawn it first
+				this.spawnEnemy(id, position.x, position.y);
+			}
+		});
 	},
 
 	setGame: function() {
@@ -110,6 +132,7 @@ var MyGame = tpf.Game.extend({
 
 		this.spawnPlayer();
 
+		ig.game.enemies = {};
 		ig.game.network.attachListeners();
 	},
 
@@ -202,6 +225,10 @@ var MyGame = tpf.Game.extend({
 	spawnPlayer() {
 		const position = this.getRandomSpawnPos();
 		this.spawnEntity(EntityPlayer, position.x, position.y);
+	},
+
+	spawnEnemy(id, x, y) {
+		ig.game.enemies[id] = this.spawnEntity(EntityEnemyPlayer, x, y);
 	},
 
 	update: function() {
