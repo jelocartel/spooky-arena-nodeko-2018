@@ -10,5 +10,6 @@ const gameServer = new colyseus.Server({
   server: http.createServer(app)
 });
 gameServer.register("default", DefaultRoom);
+gameServer.listen(process.env.PORT || 2657);
+console.log('Server is running...')
 
-gameServer.listen(2657);
