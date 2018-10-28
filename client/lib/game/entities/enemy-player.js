@@ -13,7 +13,7 @@ ig.module(
 
             size: { x: 16, y: 16 },
             friction: { x: 100, y: 100 },
-            scale: 0.5,
+            scale: 0.4,
 
             health: 1,
             damage: 10,

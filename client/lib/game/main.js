@@ -90,7 +90,6 @@ var MyGame = tpf.Game.extend({
 		this.labelCanvasCtx = this.labelCanvas.getContext('2d');
 		this.labelCanvasCtx.fillStyle = '#FFFFFF';
 		this.labelCanvasCtx.font = '30px Arial';
-		document.body.append(this.labelCanvas);
 		// Setup Controls
 		ig.input.bind( ig.KEY.MOUSE1, 'click' );
 		if( ig.ua.mobile ) {
@@ -149,7 +148,7 @@ var MyGame = tpf.Game.extend({
 
 		// Load the last level we've been in or the default Base1
 		// this.loadLevel( this.lastLevel || LevelBase1 );
-		this.loadLevel( this.lastLevel || LevelBase2 );
+		this.loadLevel( this.lastLevel || LevelBase1 );
 
 		this.spawnPlayer();
 
