@@ -59,9 +59,11 @@ ig.module(
                     console.log('killed event = ', message.data)
                     if(ig.game.player.enemyId === message.data.id) {
                         ig.game.player.kill();
+                    } else {
+                        ig.game.enemies[message.data.id].kill();
                     }
                 } else if (message.type === 'left') {
-                    ig.game.ememies[message.data.id].kill();
+                    ig.game.enemies[message.data.id].kill();
                 }
               });
 

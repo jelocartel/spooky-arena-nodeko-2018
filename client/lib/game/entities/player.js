@@ -247,13 +247,13 @@ EntityPlayer = tpf.Entity.extend({
 		ig.game.hud.showDamageIndicator( xpos, ypos, 1 );
 
 		this.hurtSounds.random().play();
-		ig.game.network.room.send({
-			type: 'killed',
-			data: {
-					id: ig.game.player.enemyId,
-					killerId: from.shooterId,
-			}
-	});
+	// 	ig.game.network.room.send({
+	// 		type: 'killed',
+	// 		data: {
+	// 				id: ig.game.player.enemyId,
+	// 				killerId: from.shooterId,
+	// 		}
+	// });
 		this.parent( amount, from );
 	},
 

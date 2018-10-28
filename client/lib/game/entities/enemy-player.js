@@ -67,6 +67,24 @@ ig.module(
                 }
                 this.parent();
             },
+            receiveDamage: function( amount, from ) {
+                console.log('elo');
+                console.log({
+                    id: this.enemyId,
+                    killerId: from.shooterId,
+            });
+                if(from.shooterId === ig.game.myId) {
+                    console.log('ziom');
+                ig.game.network.room.send({
+                    type: 'killed',
+                    data: {
+                            id: this.enemyId,
+                            killerId: from.shooterId,
+                    }
+            });
+        }
+                this.parent( amount, from );
+            },
 
             check: function (other) {
                 if (other.shooterId === this.enemyId || other.enemyId) {return;}
