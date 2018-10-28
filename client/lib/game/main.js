@@ -13,6 +13,7 @@ ig.module(
 
 	'game.levels.base1',
 	'game.levels.base2',
+
 	'game.entities.enemy-blob',
 	'game.entities.enemy-player',
 
@@ -157,7 +158,7 @@ var MyGame = tpf.Game.extend({
 
 		// Load the last level we've been in or the default Base1
 		// this.loadLevel( this.lastLevel || LevelBase1 );
-		this.loadLevel( LevelBase2 || LevelBase1 );
+		this.loadLevel( LevelBase1 );
 
 		this.spawnPlayer();
 
