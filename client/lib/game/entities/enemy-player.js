@@ -68,13 +68,7 @@ ig.module(
                 this.parent();
             },
             receiveDamage: function( amount, from ) {
-                console.log('elo');
-                console.log({
-                    id: this.enemyId,
-                    killerId: from.shooterId,
-            });
                 if(from.shooterId === ig.game.myId) {
-                    console.log('ziom');
                 ig.game.network.room.send({
                     type: 'killed',
                     data: {

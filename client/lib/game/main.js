@@ -86,6 +86,7 @@ var MyGame = tpf.Game.extend({
 
 		this.setTitle();
 		this.setNetwork();
+
 	},
 
 	setTitle: function() {
@@ -177,6 +178,8 @@ var MyGame = tpf.Game.extend({
 		ig.input.bind( ig.GAMEPAD.FACE_4, 'reset-tracking' );
 		ig.input.bind( ig.GAMEPAD.FACE_3, 'weaponNext' );
 		ig.input.bind( ig.GAMEPAD.FACE_2, 'weaponPrev' );
+
+		ig.input.bind( ig.KEY.TAB, 'showResults' );
 	},
 
 	setupTouchControls: function() {
@@ -401,3 +404,4 @@ else {
 }
 
 });
+

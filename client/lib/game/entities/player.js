@@ -171,6 +171,16 @@ EntityPlayer = tpf.Entity.extend({
 			}
 		}
 
+		//show results
+		if (ig.input.state('showResults')) {
+			let results= '';
+			Object.keys(ig.game.gameState.players).forEach(player => {
+				results += `${ig.game.gameState.players[player].name} : ${ig.game.gameState.players[player].kills } \n`;
+			})
+			ig.game.hud.showMessage( `Highscore: \n ${results}`, 0.01 );
+
+		}
+
 		// Change Weapon; be careful to only switch after the shoot button was released
 		if( this.delayedWeaponSwitchIndex >= 0 ) {
 			this.switchWeapon( this.delayedWeaponSwitchIndex );
