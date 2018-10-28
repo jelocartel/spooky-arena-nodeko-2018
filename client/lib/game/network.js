@@ -49,6 +49,7 @@ ig.module(
             this.room.onStateChange.add((state) => {
                 // console.log({state});
                 this.moveAction(state);
+                ig.game.gameState = state;
             });
             this.room.onMessage.add(function(message) {
                 if (message.type === 'shoot') {
