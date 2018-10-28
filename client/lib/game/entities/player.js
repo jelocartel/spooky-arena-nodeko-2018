@@ -174,10 +174,12 @@ EntityPlayer = tpf.Entity.extend({
 		//show results
 		if (ig.input.state('showResults')) {
 			let results= '';
-			Object.keys(ig.game.gameState.players).forEach(player => {
-				results += `${ig.game.gameState.players[player].name} : ${ig.game.gameState.players[player].kills } \n`;
+			Object.keys(ig.game.gameState.players).sort((a, b) => {
+				return ig.game.gameState.players[a].kills < ig.game.gameState.players[b].kills;
+			}).forEach(player => {
+				results += `${ig.game.gameState.players[player].name}: ${ig.game.gameState.players[player].kills } \n`;
 			})
-			ig.game.hud.showMessage( `Highscore: \n ${results}`, 0.01 );
+			ig.game.hud.showMessage( `Highscore\n ${results}`, 0.01 );
 
 		}
 

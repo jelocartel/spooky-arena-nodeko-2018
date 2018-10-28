@@ -48,7 +48,7 @@ MyTitle = ig.Class.extend({
 			ig.game.network.room.send({
 				type: 'name',
 				data: {
-					name: nameInput.value || `guest ${Math.floor(Math.random()*10000)}`
+					name: nameInput.value || ig.game.myId
 				}
 			});
 			ig.$('#name-input-panel').style.display = 'none';
