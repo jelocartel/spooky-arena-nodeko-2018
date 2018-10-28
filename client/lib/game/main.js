@@ -131,7 +131,7 @@ var MyGame = tpf.Game.extend({
 
 			} else {
 				// This is new enemy, spawn it first
-				this.spawnEnemy(id, position.x, position.y);
+				this.spawnEnemy(id, position.x, position.y, position.name);
 			}
 		});
 	},
@@ -249,14 +249,14 @@ var MyGame = tpf.Game.extend({
 		this.spawnEntity(EntityPlayer, position.x, position.y);
 	},
 
-	spawnEnemy(id, x, y) {
+	spawnEnemy(id, x, y, name) {
 		ig.game.enemies[id] = this.spawnEntity(EntityEnemyPlayer, x, y);
 		ig.game.enemies[id].enemyId = id;
 
 		this.labelCanvas.width = this.labelMaxWidth;
 		this.labelCanvasCtx.fillStyle = '#FFFFFF';
 		this.labelCanvasCtx.font = '30px Arial';
-		this.labelCanvasCtx.fillText(id, 0, 30, this.labelMaxWidth);
+		this.labelCanvasCtx.fillText(name || id, 0, 30, this.labelMaxWidth);
 		this.labels[id] = document.createElement('img');
 		this.labels[id].src = this.labelCanvas.toDataURL();
 		this.labels[id].onload = () => {
