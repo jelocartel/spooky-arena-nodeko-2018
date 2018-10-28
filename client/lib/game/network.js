@@ -61,12 +61,14 @@ ig.module(
                 } else if (message.type === 'killed') {
                     if(ig.game.player.enemyId === message.data.id) {
                         ig.game.player.kill();
+                        this.showKill(message.data);
                     } else {
-                        if(ig.game.enemies[message.data.id])
+                        if(ig.game.enemies[message.data.id]) {
                             ig.game.enemies[message.data.id].kill();
-                        delete ig.game.enemies[message.data.id];
+                            this.showKill(message.data);
+                            delete ig.game.enemies[message.data.id];
+                        }
                     }
-                    this.showKill(message.data);
                 } else if (message.type === 'left') {
                     if (ig.game.enemies[message.data.id])
                         ig.game.enemies[message.data.id].kill();
