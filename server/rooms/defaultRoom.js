@@ -46,7 +46,7 @@ class DefaultRoom extends Room {
       if (this.state.players[ data.data.id ]) this.state.players[ data.data.id ].deads++;
       this.broadcast(data);
     } else if ( data.type === 'name') {
-      this.state.players[ client.sessionId ].name = data.name;
+      this.state.players[ client.sessionId ].name = data.data.name;
      }
 
   }
