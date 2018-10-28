@@ -67,7 +67,7 @@ MyHud = tpf.Hud.extend({
 
 	KillText(text) {
 		ig.game.gameLog.push(text);
-		if(ig.game.gameLog.length >5) ig.game.gameLog.shift();
+		if(ig.game.gameLog.length >1) ig.game.gameLog.shift();
 	}
 });
 
