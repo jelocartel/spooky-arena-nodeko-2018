@@ -10,6 +10,7 @@ MyHud = tpf.Hud.extend({
 
 	font: new tpf.Font( 'media/fredoka-one.font.png' ),
 	smallFont: new tpf.Font('media/small.png'),
+	smallFont2: new tpf.Font('media/small2.png'),
 
 	// healthIconImage: new ig.Image( 'media/health-icon.png' ),
 	damageIndicatorImage: new ig.Image( 'media/hud-blood-low.png' ),
@@ -44,7 +45,18 @@ MyHud = tpf.Hud.extend({
 
 		this.font.draw( 'Kills: ' +ig.game.blobKillCount, 32, 8);
 		
-		this.font.draw( `Players: ${Object.keys(ig.game.enemies).length + 1}` , 450, 8);
+		this.smallFont2.draw( `Players: ${Object.keys(ig.game.enemies).length + 1} \nHIGHSCORE` , 500, 8);
+		
+		let results= '';
+		if (ig.game.gameState) {
+			let playerList = Object.keys(ig.game.gameState.players).sort((a, b) => {
+				return ig.game.gameState.players[a].kills < ig.game.gameState.players[b].kills;
+			});
+			for (let i = 0; i <= 4 && i < playerList.length; i++) {
+				results += `${ig.game.gameState.players[playerList[i]].name}: ${ig.game.gameState.players[playerList[i]].kills}\n`;
+			}
+			this.smallFont.draw( results , 500, 45);
+		}
 
 		for(var i=0;i<ig.game.gameLog.length;i++)
 			this.smallFont.draw( ig.game.gameLog[i] , 640 ,this.height - (this.smallFont.height + 1) * (ig.game.gameLog.length - i), ig.Font.ALIGN.RIGHT);
