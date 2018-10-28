@@ -45,7 +45,7 @@ MyHud = tpf.Hud.extend({
 
 		this.font.draw( 'Kills: ' +ig.game.blobKillCount, 32, 8);
 		
-		this.smallFont2.draw( `Players: ${Object.keys(ig.game.enemies).length + 1} \nHIGHSCORE` , 500, 8);
+		this.smallFont2.draw( `Players: ${Object.keys(ig.game.enemies).length + 1} \nHIGHSCORE` , 620, 8, ig.Font.ALIGN.RIGHT);
 		
 		let results= '';
 		if (ig.game.gameState) {
@@ -55,7 +55,7 @@ MyHud = tpf.Hud.extend({
 			for (let i = 0; i <= 4 && i < playerList.length; i++) {
 				results += `${ig.game.gameState.players[playerList[i]].name}: ${ig.game.gameState.players[playerList[i]].kills}\n`;
 			}
-			this.smallFont.draw( results , 500, 45);
+			this.smallFont.draw( results , 620, 45, ig.Font.ALIGN.RIGHT);
 		}
 
 		for(var i=0;i<ig.game.gameLog.length;i++)
