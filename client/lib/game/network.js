@@ -62,12 +62,14 @@ ig.module(
                     if(ig.game.player.enemyId === message.data.id) {
                         ig.game.player.kill();
                     } else {
-                        ig.game.enemies[message.data.id].kill();
+                        if(ig.game.enemies[message.data.id])
+                            ig.game.enemies[message.data.id].kill();
                         delete ig.game.enemies[message.data.id];
                     }
                     this.showKill(message.data);
                 } else if (message.type === 'left') {
-                    ig.game.enemies[message.data.id].kill();
+                    if (ig.game.enemies[message.data.id])
+                        ig.game.enemies[message.data.id].kill();
                     delete ig.game.enemies[message.data.id];
                 }
               });
@@ -76,7 +78,7 @@ ig.module(
 
         moveAction() {},
         showKill(data) {
-            ig.game.hud.KillText(data.id + ' kills ' + data.killerId);
+            ig.game.hud.KillText(data.killerName + ' kills ' + data.killedName);
         },
     });
 
