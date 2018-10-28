@@ -192,12 +192,6 @@ EntityBlastRadius = ig.Entity.extend({
 			other.receiveDamage( damage, this );
 		}
 
-		ig.game.network.room.send({
-			type: 'killed',
-			data: {
-				id: other.enemyId 
-			}
-		});
 	}
 });
 

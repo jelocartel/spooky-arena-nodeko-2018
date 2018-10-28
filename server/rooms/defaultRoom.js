@@ -40,8 +40,8 @@ class DefaultRoom extends Room {
        data.shooter = client.sessionId;
        this.broadcast(data);
      } else if (data.type === 'killed') {
-      this.state.players[ client.sessionId ].kills++;
-      data.data.killerId = client.sessionId;
+      this.state.players[ data.data.killerId ].kills++;
+      // data.data.killerId = client.sessionId;
       this.broadcast(data);
     }
 

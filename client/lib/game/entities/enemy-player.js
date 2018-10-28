@@ -65,8 +65,6 @@ ig.module(
                 for (var i = 0; i < 20; i++) {
                     ig.game.spawnEntity(EntityEnemyBlobGib, cx, cy);
                 }
-                // ig.game.blobKillCount++;
-                ig.game.enemies[id].dead = true;
                 this.parent();
             },
 
@@ -79,13 +77,6 @@ ig.module(
 
                 // Only hurt the player once a second
                 // this.hurtTimer.set(1);
-
-                ig.game.network.room.send({
-                    type: 'killed',
-                    data: {
-                        id: this.enemyId
-                    }
-                });
 
 
                 this.vel.x = -this.vel.x;
