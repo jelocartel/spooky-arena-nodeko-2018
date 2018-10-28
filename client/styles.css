@@ -106,3 +106,9 @@ body.mobile #canvas {
 	background-color: #000;
 }
 
+#name-input-panel {
+	position: absolute;
+	top: 50%;
+	left: 35%;
+	display: block;
+}

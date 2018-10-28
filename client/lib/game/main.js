@@ -85,6 +85,7 @@ var MyGame = tpf.Game.extend({
 
 		this.setTitle();
 		this.setNetwork();
+
 	},
 
 	setTitle: function() {
@@ -402,3 +403,4 @@ else {
 }
 
 });
+

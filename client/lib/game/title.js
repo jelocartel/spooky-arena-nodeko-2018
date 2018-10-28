@@ -44,6 +44,15 @@ MyTitle = ig.Class.extend({
 	update: function() {
 		if( ig.input.released('shoot') || ig.input.released('click') ) {
 			ig.game.setGame();
+			const nameInput = ig.$('#name-input');
+			console.log(nameInput.value)
+			ig.game.network.room.send({
+				type: 'name',
+				data: {
+					name: nameInput.value
+				}
+			});
+			ig.$('#name-input-panel').style.display = 'none';
 		}
 	},
 
