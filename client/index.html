@@ -22,15 +22,13 @@
 			Rotate to Landscape to play!
 		</div>
 
-		<div class="panel desktop-only">
-			<div class="option">
-				<input type="checkbox" id="requestFullscreen" />
-				<label for="requestFullscreen"><span></span>Fullscreen</label>
-			</div>
-			<div id='name-input-panel'>
-				<label>Name: </label>
-				<input id='name-input' type='text' placeholder='Your Name' />
-			</div>
+		<div class="panel desktop-only" style="display: flex; justify-content: space-between">
+			<span id='name-input-panel'>
+				<input id='name-input' type='text' style="padding: 8px;" placeholder='Enter Your Name Here' />
+			</span>
+			<span class="option">
+				<button id="requestFullscreen" style="padding: 8px;">Fullscreen</button>
+			</span>
 		</div>
 
 		<!-- <div id='name-input-panel'>

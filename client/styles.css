@@ -42,10 +42,6 @@ a:hover {
 	background-color: rgba(0,0,0,0.5);
 }
 
-.option {
-	padding: 4px 0 4px 0;
-}
-
 label {
 	color: #fff;
 	font-weight: bold;
@@ -65,7 +61,7 @@ label {
 }
 
 
-/* 
+/*
 	Display or hide certain elements depending on platform (mobile/desktop),
 	orientation (landscape/portrait) and webgl support.
 	The body classes .mobile or .desktop and .webgl or .no-webgl are set in
