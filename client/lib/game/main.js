@@ -12,12 +12,14 @@ ig.module(
 	'plugins.gamepad',
 
 	'game.levels.base1',
+	'game.levels.base2',
 	'game.entities.enemy-blob',
 	'game.entities.enemy-player',
 
 	'game.entities.grenade-pickup',
 
 	'game.entities.player',
+	'game.entities.label',
 
 	'game.title',
 	'game.hud',
@@ -49,6 +51,13 @@ var MyGame = tpf.Game.extend({
 	powerupSpawnTimer: null,
 	gameLog: [],
 
+	labelCanvas: null,
+	labelCanvasCtx: null,
+	labels: {},
+	labelsEntities: {},
+	labelMaxWidth: 128,
+	labelMaxHeight: 128,
+
 	init: function() {
 		// Setup HTML Checkboxes and mouse lock on click
 		if( !ig.ua.mobile ) {
@@ -73,8 +82,14 @@ var MyGame = tpf.Game.extend({
 			ig.system.canvas.addEventListener('click', function(){
 				ig.system.requestMouseLock();
 			});
+
 		}
 
+		this.labelCanvas = document.createElement('canvas');
+		this.labelCanvas.height = this.labelMaxHeight;
+		this.labelCanvasCtx = this.labelCanvas.getContext('2d');
+		this.labelCanvasCtx.fillStyle = '#FFFFFF';
+		this.labelCanvasCtx.font = '30px Arial';
 		// Setup Controls
 		ig.input.bind( ig.KEY.MOUSE1, 'click' );
 		if( ig.ua.mobile ) {
@@ -111,8 +126,9 @@ var MyGame = tpf.Game.extend({
 
 			if (alreadySpawnedEnemies.includes(id)) {
 				// this enemy is already spawn, just move it
-				ig.game.enemies[id].pos.x = position.x;
-				ig.game.enemies[id].pos.y = position.y;
+				ig.game.enemies[id].pos.x = this.labelsEntities[id].pos.x = position.x;
+				ig.game.enemies[id].pos.y = this.labelsEntities[id].pos.y = position.y;
+
 			} else {
 				// This is new enemy, spawn it first
 				this.spawnEnemy(id, position.x, position.y);
@@ -131,8 +147,8 @@ var MyGame = tpf.Game.extend({
 		this.powerupSpawnTimer = new ig.Timer(this.powerupSpawnWait);
 
 		// Load the last level we've been in or the default Base1
+		// this.loadLevel( this.lastLevel || LevelBase1 );
 		this.loadLevel( this.lastLevel || LevelBase1 );
-		// this.loadLevel( this.lastLevel || LevelBase2 );
 
 		this.spawnPlayer();
 
@@ -236,6 +252,17 @@ var MyGame = tpf.Game.extend({
 	spawnEnemy(id, x, y) {
 		ig.game.enemies[id] = this.spawnEntity(EntityEnemyPlayer, x, y);
 		ig.game.enemies[id].enemyId = id;
+
+		this.labelCanvas.width = this.labelMaxWidth;
+		this.labelCanvasCtx.fillStyle = '#FFFFFF';
+		this.labelCanvasCtx.font = '30px Arial';
+		this.labelCanvasCtx.fillText(id, 0, 30, this.labelMaxWidth);
+		this.labels[id] = document.createElement('img');
+		this.labels[id].src = this.labelCanvas.toDataURL();
+		this.labels[id].onload = () => {
+			this.labelsEntities[id] = this.spawnEntity(EntityLabel, x, y, { enemyId: id });
+		}
+
 	},
 
 	update: function() {

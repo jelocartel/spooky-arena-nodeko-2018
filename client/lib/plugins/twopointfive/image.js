@@ -16,7 +16,20 @@ ig.Image.inject({
 	seamsExpanded: false,
 	textureWidth: 0,
 	textureHeight: 0,
-	
+
+	init: function (input) {
+		if (typeof input === 'string') { // If string path provided..
+			return this.parent(input); // Load image normally.
+		}
+		// Assume input is a canvas.
+		this.loaded = true;
+		this.data = input;
+		this.width = this.data.width / ig.system.scale;
+		this.height = this.data.height / ig.system.scale;
+		this.expandSeams(16);
+		this.onload();
+	},
+
 	onload: function( event ) {
 		this.texture = ig.system.renderer.loadTexture(this.data);
 		this.textureWidth = this.data.width;
@@ -40,7 +53,7 @@ ig.Image.inject({
 		expandedCanvas.height = this.textureHeight;
 		var ctx = expandedCanvas.getContext('2d');
 		ig.System.SCALE.CRISP(expandedCanvas, ctx);
-		
+
 		for( var y = 0, dy = -1; y < th; y++, dy += (tilesize+2) ) {
 			for( var x = 0, dx = -1; x < tw; x++, dx += (tilesize+2) ) {
 
