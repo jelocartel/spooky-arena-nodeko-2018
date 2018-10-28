@@ -47,6 +47,7 @@ var MyGame = tpf.Game.extend({
 
 	powerupSpawnWait: 8,
 	powerupSpawnTimer: null,
+	gameLog: [],
 
 	init: function() {
 		// Setup HTML Checkboxes and mouse lock on click
