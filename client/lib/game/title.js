@@ -48,7 +48,7 @@ MyTitle = ig.Class.extend({
 			ig.game.network.room.send({
 				type: 'name',
 				data: {
-					name: nameInput.value || ig.game.myId
+					name: nameInput.value ? nameInput.value.replace(/[^\x00-\x7F]/gi, '') : ig.game.myId
 				}
 			});
 			ig.$('#name-input-panel').style.display = 'none';
