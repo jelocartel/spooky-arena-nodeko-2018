@@ -41,7 +41,9 @@ MyHud = tpf.Hud.extend({
 		// this.healthIcon.draw();
 		// this.font.draw( player.health, 90, this.height - this.font.height + 1, ig.Font.ALIGN.RIGHT );
 
-		this.font.draw( 'Kills: ' +ig.game.blobKillCount, 32, 8 );
+		this.font.draw( 'Kills: ' +ig.game.blobKillCount, 32, 8);
+		
+		this.font.draw( `Players: ${Object.keys(ig.game.enemies).length + 1}` , 450, 8);
 
 		// Draw the current message (showMessage(text)) and the damage indicator
 		this.drawDefault();
