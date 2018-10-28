@@ -58,6 +58,8 @@ var MyGame = tpf.Game.extend({
 	labelMaxWidth: 128,
 	labelMaxHeight: 128,
 
+	names: {},
+
 	init: function() {
 		// Setup HTML Checkboxes and mouse lock on click
 		if( !ig.ua.mobile ) {
@@ -126,9 +128,16 @@ var MyGame = tpf.Game.extend({
 
 			if (alreadySpawnedEnemies.includes(id)) {
 				// this enemy is already spawn, just move it
-				ig.game.enemies[id].pos.x = this.labelsEntities[id].pos.x = position.x;
-				ig.game.enemies[id].pos.y = this.labelsEntities[id].pos.y = position.y;
+				if (this.names[id] !== position.name) {
+					this.generateLabel(id, position.name);
+				}
+				ig.game.enemies[id].pos.x = position.x;
+				ig.game.enemies[id].pos.y = position.y;
 
+				if (this.labelsEntities[id]) {
+					this.labelsEntities[id].pos.x = position.x;
+					this.labelsEntities[id].pos.y = position.y;
+				}
 			} else {
 				// This is new enemy, spawn it first
 				this.spawnEnemy(id, position.x, position.y, position.name);
@@ -148,7 +157,7 @@ var MyGame = tpf.Game.extend({
 
 		// Load the last level we've been in or the default Base1
 		// this.loadLevel( this.lastLevel || LevelBase1 );
-		this.loadLevel( this.lastLevel || LevelBase1 );
+		this.loadLevel( LevelBase2 || LevelBase1 );
 
 		this.spawnPlayer();
 
@@ -252,7 +261,15 @@ var MyGame = tpf.Game.extend({
 	spawnEnemy(id, x, y, name) {
 		ig.game.enemies[id] = this.spawnEntity(EntityEnemyPlayer, x, y);
 		ig.game.enemies[id].enemyId = id;
+		this.generateLabel(id, name);
+	},
 
+	generateLabel(id, name) {
+		if (this.labelsEntities[id] && typeof this.labelsEntities[id].kill === 'function') {
+			this.labelsEntities[id].kill();
+		}
+
+		this.names[id] = name;
 		this.labelCanvas.width = this.labelMaxWidth;
 		this.labelCanvasCtx.fillStyle = '#FFFFFF';
 		this.labelCanvasCtx.font = '30px Arial';
@@ -260,9 +277,8 @@ var MyGame = tpf.Game.extend({
 		this.labels[id] = document.createElement('img');
 		this.labels[id].src = this.labelCanvas.toDataURL();
 		this.labels[id].onload = () => {
-			this.labelsEntities[id] = this.spawnEntity(EntityLabel, x, y, { enemyId: id });
+			this.labelsEntities[id] = this.spawnEntity(EntityLabel, -10000, -10000, { enemyId: id });
 		}
-
 	},
 
 	update: function() {
