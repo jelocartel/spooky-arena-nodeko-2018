@@ -61,9 +61,11 @@ ig.module(
                         ig.game.player.kill();
                     } else {
                         ig.game.enemies[message.data.id].kill();
+                        delete ig.game.enemies[message.data.id];
                     }
                 } else if (message.type === 'left') {
                     ig.game.enemies[message.data.id].kill();
+                    delete ig.game.enemies[message.data.id];
                 }
               });
 
