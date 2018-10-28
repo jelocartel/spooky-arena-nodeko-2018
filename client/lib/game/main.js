@@ -59,16 +59,16 @@ var MyGame = tpf.Game.extend({
 				return false;
 			},false);
 
-			ig.$('#riftStereoMode').addEventListener('change', function( ev ) {
-				ig.system.setStereoMode(ev.target.checked);
-				ev.preventDefault();
-				this.blur();
-				return false;
-			},false);
+			// ig.$('#riftStereoMode').addEventListener('change', function( ev ) {
+			// 	ig.system.setStereoMode(ev.target.checked);
+			// 	ev.preventDefault();
+			// 	this.blur();
+			// 	return false;
+			// },false);
 
-			if( ig.$('#riftStereoMode').checked ) {
-				ig.system.setStereoMode(true);
-			}
+			// if( ig.$('#riftStereoMode').checked ) {
+			// 	ig.system.setStereoMode(true);
+			// }
 
 			ig.system.canvas.addEventListener('click', function(){
 				ig.system.requestMouseLock();

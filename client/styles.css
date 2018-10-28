@@ -106,9 +106,10 @@ body.mobile #canvas {
 	background-color: #000;
 }
 
-#name-input-panel {
+/* #name-input-panel {
 	position: absolute;
-	top: 50%;
-	left: 35%;
+	top: 45%;
+	left :50%;
 	display: block;
-}
+	transform: translateX(-50%)
+} */
